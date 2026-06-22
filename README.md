@@ -33,7 +33,7 @@ npm install
 npm run serve
 ```
 
-访问 http://localhost:8080
+访问 https://ymhyyds.github.io/Zero/
 
 ### 测试账号
 
@@ -70,5 +70,4 @@ npm run serve
 | 登录成功后立即提示"登录已过期" | Mock.js 的 response 回调不会传入请求头(headers),导致 token 校验逻辑失效 | Mock 层改为直接从 `localStorage` 读取 token 进行校验 |
 | 用户列表页报 `404` | Mock.js 对字符串 URL 做精确匹配,无法匹配带查询参数（分页）的请求地址 | 将接口 URL 改为正则匹配,兼容查询字符串 |
 | Windows 下打包报 `Conflict: Multiple assets emit different content to the same filename index.html` | `CopyWebpackPlugin` 排除 `index.html` 的内部逻辑在 Windows 路径分隔符下失效 | 在 `vue.config.js` 中通过 `chainWebpack` 手动补充跨平台的排除规则 |
-
 

@@ -21,11 +21,12 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/eslint-parser": "^7.25.1",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.28.0",
-    "vue-template-compiler": "^2.7.16",
-    "@vue/cli-plugin-babel": "^5.0.8",
-    "@vue/cli-plugin-eslint": "^5.0.8"
+    "gh-pages": "^6.3.0",
+    "vue-template-compiler": "^2.7.16"
   },
   "browserslist": [
     "> 1%",
