@@ -11,33 +11,48 @@ function hasRoutePermission(route, roles) {
 
 router.beforeEach(async (to, from, next) => {
   const token = getToken()
+
   if (token) {
     if (to.path === '/login') {
-      next({ path: '/' })
+      next({ path: '/dashboard', replace: true })
       return
     }
 
-    if (!store.getters.roles.length) {
+    if (!store.getters.roles || !store.getters.roles.length) {
       try {
         await store.dispatch('user/getInfo')
-      } catch (error) {
+      } catch (e) {
         await store.dispatch('user/logout')
-        next(`/login?redirect=${to.path}`)
+        next({ path: '/login', replace: true })
         return
       }
     }
 
-    if (hasRoutePermission(to, store.getters.roles)) {
+    const roles = store.getters.roles || []
+
+    const hasPermission =
+      !to.meta?.roles ||
+      roles.some(r => to.meta.roles.includes(r))
+
+    if (hasPermission) {
       next()
     } else {
-      next('/dashboard')
+      if (to.path !== '/dashboard') {
+        next({ path: '/dashboard', replace: true })
+      } else {
+        next()
+      }
     }
     return
   }
-
+  
   if (whiteList.includes(to.path)) {
     next()
   } else {
-    next(`/login?redirect=${to.path}`)
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath },
+      replace: true
+    })
   }
 })

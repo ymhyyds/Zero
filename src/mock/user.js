@@ -13,7 +13,7 @@ let users = Mock.mock({
 
 export default [
   {
-    url: '/api/users',
+    url: /^\/api\/users(\?.*)?$/,
     type: 'get',
     response: config => {
       const { page = 1, pageSize = 10, keyword = '' } = config.query

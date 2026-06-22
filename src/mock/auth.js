@@ -1,3 +1,5 @@
+import { getToken } from '@/utils/auth'
+
 const users = {
   admin: {
     password: '123456',
@@ -20,22 +22,48 @@ export default [
     url: '/api/login',
     type: 'post',
     response: config => {
-      const { username, password } = JSON.parse(config.body)
+      const { username, password } = JSON.parse(config.body || '{}')
+
       const user = users[username]
+
       if (!user || user.password !== password) {
-        return { code: 401, message: '用户名或密码错误' }
+        return {
+          code: 401,
+          message: '用户名或密码错误'
+        }
       }
-      return { code: 200, data: { token: user.token }, message: '登录成功' }
+
+      return {
+        code: 200,
+        data: {
+          token: user.token
+        },
+        message: '登录成功'
+      }
     }
   },
+
   {
     url: '/api/user/info',
     type: 'get',
     response: config => {
-      const token = (config.headers.Authorization || '').replace('Bearer ', '')
+      // ✅ 关键修复：Mock.js 不会把 headers 传给 response，
+      // 这里改成直接从 localStorage 读取 token（浏览器端 mock，可以这样做）
+      const token = getToken() || ''
+
       const user = Object.values(users).find(item => item.token === token)
-      if (!user) return { code: 401, message: '登录已过期' }
-      return { code: 200, data: user }
+
+      if (!user) {
+        return {
+          code: 401,
+          message: '登录已过期'
+        }
+      }
+
+      return {
+        code: 200,
+        data: user
+      }
     }
   }
 ]
