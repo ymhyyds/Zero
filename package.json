@@ -1,0 +1,35 @@
+{
+  "name": "vue2-element-admin-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@vue/cli-service": "^5.0.8",
+    "axios": "^1.7.9",
+    "core-js": "^3.38.1",
+    "echarts": "^5.5.1",
+    "element-ui": "^2.15.14",
+    "mockjs": "^1.1.0",
+    "vue": "^2.7.16",
+    "vue-router": "^3.6.5",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/eslint-parser": "^7.25.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.28.0",
+    "vue-template-compiler": "^2.7.16",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
